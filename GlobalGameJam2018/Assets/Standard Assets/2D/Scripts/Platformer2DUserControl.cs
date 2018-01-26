@@ -42,7 +42,7 @@ namespace UnityStandardAssets._2D
             float h = Input.acceleration.x;
             if(h < -1) {  h = -1;}
             if(h >  1) { h = 1; }
-
+        
             // Pass all parameters to the character control script.
             m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
