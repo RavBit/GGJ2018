@@ -9,6 +9,7 @@ namespace UnityStandardAssets._2D
     {
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
+        private static float TILT_SENSITIVITY = 0.8f;
 
 
         private void Awake()
@@ -40,8 +41,8 @@ namespace UnityStandardAssets._2D
             // float h = CrossPlatformInputManager.GetAxis("Horizontal");
 
             float h = Input.acceleration.x;
-            if(h < -1) {  h = -1;}
-            if(h >  1) { h = 1; }
+            if(h < -TILT_SENSITIVITY) {  h = -1;}
+            if(h >  TILT_SENSITIVITY) { h = 1; }
         
             // Pass all parameters to the character control script.
             m_Character.Move(h, crouch, m_Jump);
