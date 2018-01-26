@@ -13,13 +13,19 @@ public class Audio_Manager : MonoBehaviour {
     public void Change_Music(Time_States _ts) {
         switch(_ts) {
             case (Time_States.Back):
-                Background_Music.DOPitch(0.5F, 2);
+                Background_Music.DOPitch(0.25F, 2);
                 break;
             case (Time_States.FastBack):
-                Background_Music.DOPitch(0.25F, 2);
+                Background_Music.DOPitch(0.5F, 2);
                 break;
             case (Time_States.Forward):
                 Background_Music.DOPitch(1.5F, 2);
+                break;
+            case (Time_States.FastForward):
+                Background_Music.DOPitch(1.75F, 2);
+                break;
+            case (Time_States.Normal):
+                Background_Music.DOPitch(1F, 2);
                 break;
         }
     }
