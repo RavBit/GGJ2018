@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Time_Manager : MonoBehaviour {
 
-    public void Start() {
-    }
     public void TimeChange(int number) {
         switch(number) {
             case (-2):
