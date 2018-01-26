@@ -9,6 +9,8 @@ public class Game_Manager : MonoBehaviour {
     public int Gravity = 1;
     public int Speed = 1;
 
+    
+
     private void Awake() {
         if (instance != null)
             Debug.LogError("More than one Game Manager in the scene");
