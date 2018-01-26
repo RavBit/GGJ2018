@@ -5,7 +5,6 @@ using UnityEngine;
 public class Time_Manager : MonoBehaviour {
 
     public void Start() {
-        Event_Manager.TimeChange += Change_Time;
     }
     public void TimeChange(int number) {
         switch(number) {
@@ -27,11 +26,7 @@ public class Time_Manager : MonoBehaviour {
         }
     }
     void Change_Time(Time_States _ts) {
-        switch (_ts) {
-            case (Time_States.Back):
-                Time.timeScale = 0.5f;
-                break;
-        }
+        Event_Manager.Time_Change(_ts);
     }
 
 }
