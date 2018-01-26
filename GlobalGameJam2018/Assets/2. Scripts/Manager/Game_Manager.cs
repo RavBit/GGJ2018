@@ -10,6 +10,8 @@ public class Game_Manager : MonoBehaviour {
     public float WheelSpeed = 1;
     public float Speed = 1;
 
+    
+
     private void Awake() {
         if (instance != null)
             Debug.LogError("More than one Game Manager in the scene");
