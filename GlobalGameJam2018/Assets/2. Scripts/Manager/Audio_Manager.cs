@@ -7,26 +7,10 @@ public class Audio_Manager : MonoBehaviour {
     [Header("Audio Sources")]
     public AudioSource Background_Music;
     public void Start() {
-        Event_Manager.TimeChange += Change_Music;
+        Event_Manager.MusicChange += Change_Music;
     }
     
-    public void Change_Music(Time_States _ts) {
-        switch(_ts) {
-            case (Time_States.Back):
-                Background_Music.DOPitch(0.25F, 2);
-                break;
-            case (Time_States.FastBack):
-                Background_Music.DOPitch(0.5F, 2);
-                break;
-            case (Time_States.Forward):
-                Background_Music.DOPitch(1.5F, 2);
-                break;
-            case (Time_States.FastForward):
-                Background_Music.DOPitch(1.75F, 2);
-                break;
-            case (Time_States.Normal):
-                Background_Music.DOPitch(1F, 2);
-                break;
-        }
+    public void Change_Music() {
+                Background_Music.DOPitch(Game_Manager.instance.Speed, 0.1f);
     }
 }
