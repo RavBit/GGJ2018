@@ -10,7 +10,9 @@ public class Game_Manager : MonoBehaviour {
     public float WheelSpeed = 1;
     public float Speed = 1;
 
-    
+
+    public GameObject playerObject;
+
 
     private void Awake() {
         if (instance != null)
