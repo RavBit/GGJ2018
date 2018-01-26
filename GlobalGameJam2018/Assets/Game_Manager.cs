@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Game_Manager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static Game_Manager instance;
+
+
+    private void Awake() {
+        if (instance != null)
+            Debug.LogError("More than one Game Manager in the scene");
+        else
+            instance = this;
+    }
 }
