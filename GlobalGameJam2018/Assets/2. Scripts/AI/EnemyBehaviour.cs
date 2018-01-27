@@ -44,13 +44,19 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         groundedChecker = transform.Find("GroundedCheck");
-        targetObject = Game_Manager.instance.playerObject;
+        StartCoroutine(grabReferences());
 
-        //runs some functions
-        SanitizeInput();
-        StartCoroutine(checkForPlayer());
 	}
 	
+    //we delay starting the enemy to give the singleton time to launch
+    private IEnumerator grabReferences()
+    {
+        yield return new WaitForSeconds(2f);
+        targetObject = Game_Manager.instance.playerObject;
+
+        SanitizeInput();
+        StartCoroutine(checkForPlayer());
+    }
     //checks some input and throws warnings at the user 
     void SanitizeInput()
     {
