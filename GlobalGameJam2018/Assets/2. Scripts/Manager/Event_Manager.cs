@@ -12,9 +12,13 @@ public class Event_Manager : MonoBehaviour {
     public static event ClockWheel_UI ClockWheelChange;
     public delegate Button Button_Get_Button();
     public static event Button_Get_Button GetButton;
-
+    public delegate void Malfunct();
+    public static event Malfunct WheelsMalfunction;
+    public static event Malfunct WheelsOperate;
     public delegate GameObject HeadGet();
     public static event HeadGet GetHead;
+    public delegate void SetMalfunction(bool state);
+    public static event SetMalfunction MalfunctionSet;
     public delegate void HeadSet(GameObject head);
     public static event HeadSet SetHead;
     public static void Time_Change(Time_States _timestate) {
@@ -33,10 +37,19 @@ public class Event_Manager : MonoBehaviour {
     public static Button Get_Button() {
         return GetButton();
     }
+    public static void Malfunction_Set(bool state) {
+        MalfunctionSet(state);
+    }
     public static GameObject Get_Head() {
         return GetHead();
     }
     public static void Set_Head(GameObject head) {
         SetHead(head);
+    }
+    public static void Wheels_Malfunction() {
+        WheelsMalfunction();
+    }
+    public static void Wheels_Operate() {
+        WheelsOperate();
     }
 }

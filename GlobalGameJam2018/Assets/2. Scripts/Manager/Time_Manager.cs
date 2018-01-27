@@ -3,8 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Time_Manager : MonoBehaviour {
+    public bool Malfunction = false;
 
+    private void Start() {
+        Event_Manager.WheelsMalfunction += StartCoolDown;
+        Event_Manager.MalfunctionSet += SetMalfunction;
+    }
+    WaitForSeconds waitForSeconds = new WaitForSeconds(5f);
+
+    IEnumerator Regenerate() {
+        while (true) {
+            Game_Manager.instance.ResetGravity();
+            Game_Manager.instance.ResetSpeed();
+            yield return waitForSeconds;
+        }
+    }
+    public void SetMalfunction(bool state) {
+        Malfunction = state;
+    }
     public void TimeChange(int number) {
+        if ((Game_Manager.instance.Speed <= 0.1f && !Malfunction )){
+            Event_Manager.Wheels_Malfunction();
+            Malfunction = true;
+        }
+        if (Malfunction)
+            return;
         switch(number) {
             case (0):
                 Change_Time(Time_States.Speed);
@@ -16,6 +39,21 @@ public class Time_Manager : MonoBehaviour {
     }
     void Change_Time(Time_States _ts) {
         Event_Manager.Time_Change(_ts);
+    }
+
+    void StartCoolDown() {
+        Game_Manager.instance.Malfunction = 0;
+        Handheld.Vibrate();
+        Invoke("CoolDown", 4);
+    }
+
+    void CoolDown() {
+        Game_Manager.instance.Malfunction = 1;
+        Event_Manager.Malfunction_Set(false);
+        Game_Manager.instance.ResetGravity();
+        Game_Manager.instance.ResetSpeed();
+        Event_Manager.Wheels_Operate();
+        
     }
 
 }

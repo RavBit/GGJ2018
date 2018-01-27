@@ -16,6 +16,8 @@ public class UI_Manager : MonoBehaviour {
         Event_Manager.TimeChange += Rotate_Wheel;
         Event_Manager.ClockWheelChange += ToggleInteraction;
         Event_Manager.GetButton += GetButton;
+        Event_Manager.WheelsMalfunction += DisableButtons;
+        Event_Manager.WheelsOperate += EnableButtons;
     }
     public Button GetButton() {
         return GearInteraction.GetComponent<Button>();
@@ -42,8 +44,8 @@ public class UI_Manager : MonoBehaviour {
         if (Game_Manager.instance.WheelGravity == 1) {
             speed2 = -1;
         }
-        GearSpeed.transform.Rotate(0, 0, 20 * speed * Time.deltaTime);
-        GearGravity.transform.Rotate(0, 0, 20 * speed2 * Time.deltaTime);
+        GearSpeed.transform.Rotate(0, 0, Game_Manager.instance.Malfunction * 20 * speed * Time.deltaTime);
+        GearGravity.transform.Rotate(0, 0, 20 * Game_Manager.instance.Malfunction * speed2 * Time.deltaTime);
         GearInteraction.transform.Rotate(0, 0, 20 * -5 * Time.deltaTime);
     }
     public void ToggleInteraction(ClockWheelState cws) {
@@ -55,5 +57,14 @@ public class UI_Manager : MonoBehaviour {
                 GearInteraction.transform.DOMove(StopInteraction.transform.position, 2);
                 break;
         }
+    }
+
+    public void DisableButtons() {
+        GearSpeed.GetComponent<Button>().interactable = false;
+        GearGravity.GetComponent<Button>().interactable = false;
+    }
+    public void EnableButtons() {
+        GearSpeed.GetComponent<Button>().interactable = true;
+        GearGravity.GetComponent<Button>().interactable = true;
     }
 }

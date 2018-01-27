@@ -10,6 +10,7 @@ public class Game_Manager : MonoBehaviour {
     public float Gravity = 1;
     public float WheelSpeed = 1;
     public float Speed = 1;
+    public float Malfunction = 1;
 
 
     public GameObject playerObject;
@@ -33,8 +34,7 @@ public class Game_Manager : MonoBehaviour {
         StartCoroutine("TimerSpeed");
     }
     public IEnumerator TimerSpeed() {
-        yield return new WaitForSeconds(3);
-        while (Speed < 1) {
+        while (Speed < 1 && Malfunction == 1) {
             Debug.Log("Slowing");
             Game_Manager.instance.Speed += 0.1f;
             Game_Manager.instance.WheelSpeed -= 0.25f;
@@ -48,8 +48,7 @@ public class Game_Manager : MonoBehaviour {
         StartCoroutine("TimerGravity");
     }
     public IEnumerator TimerGravity() {
-        yield return new WaitForSeconds(3);
-        while (Gravity < 1) {
+        while (Gravity < 1 && Malfunction == 1) {
             Debug.Log("Slowing");
             Game_Manager.instance.Gravity += 0.1f;
             Game_Manager.instance.WheelGravity -= 0.25f;
