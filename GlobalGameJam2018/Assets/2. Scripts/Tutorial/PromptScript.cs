@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityStandardAssets._2D;
 
 public class PromptScript : MonoBehaviour {
-
+    private bool promptUsed;
     private static float promptTime = 2f;
     void Start()
     {
@@ -15,8 +15,9 @@ public class PromptScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Player")
+        if(col.tag == "Player" && !promptUsed)
         {
+            promptUsed = true;
             col.gameObject.GetComponent<PlatformerCharacter2D>().isMobile = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
             gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
