@@ -33,7 +33,11 @@ public class UI_Manager : MonoBehaviour {
         if (Game_Manager.instance.WheelGravity == 1) {
             speed2 = -1;
         }
-        GearSpeed.transform.Rotate(0, 0 , 20 * speed * Time.deltaTime);
+        GearSpeed.transform.Rotate(0, 0, 20 * speed * Time.deltaTime);
         GearGravity.transform.Rotate(0, 0, 20 * speed2 * Time.deltaTime);
+        GearInteraction.transform.Rotate(0, 0, 20 * -5 * Time.deltaTime);
+    }
+    public void ToggleInteraction() {
+
     }
 }
