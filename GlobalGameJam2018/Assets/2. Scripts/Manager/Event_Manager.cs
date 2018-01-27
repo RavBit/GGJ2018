@@ -15,6 +15,8 @@ public class Event_Manager : MonoBehaviour {
 
     public delegate GameObject HeadGet();
     public static event HeadGet GetHead;
+    public delegate void HeadSet(GameObject head);
+    public static event HeadSet SetHead;
     public static void Time_Change(Time_States _timestate) {
         TimeChange(_timestate);
     }
@@ -29,5 +31,8 @@ public class Event_Manager : MonoBehaviour {
     }
     public static GameObject Get_Head() {
         return GetHead();
+    }
+    public static void Set_Head(GameObject head) {
+        SetHead(head);
     }
 }

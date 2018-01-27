@@ -36,6 +36,7 @@ public class ClockWheel_Controller : MonoBehaviour {
     }
 
     void DoAnim() {
+        Head = Event_Manager.Get_Head();
         RemoveButton();
         gameObject.GetComponent<Collider2D>().enabled = false;
         Head.transform.parent = EndPosition;
