@@ -18,6 +18,10 @@ public class Event_Manager : MonoBehaviour {
     public delegate void HeadSet(GameObject head);
     public static event HeadSet SetHead;
     public static void Time_Change(Time_States _timestate) {
+        if (Game_Manager.instance.Speed <= 0.1f)
+            return;
+        if (Game_Manager.instance.Gravity <= 0.5f)
+            return;
         TimeChange(_timestate);
     }
     public static void Music_Change() {
