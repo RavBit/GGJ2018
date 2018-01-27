@@ -5,6 +5,7 @@ using DG.Tweening;
 public class Player_Manager : MonoBehaviour {
     public GameObject Head;
     public Transform HeadLocation;
+    public Transform EndPosition;
     public Rigidbody2D RB;
     private void Start() {
         Event_Manager.GetHead += GetHead;
@@ -12,7 +13,10 @@ public class Player_Manager : MonoBehaviour {
     }
     void Update() {
         RB.mass = Game_Manager.instance.Gravity;
-        Head.transform.Rotate(0, 0, 20 * -5 * Time.deltaTime);
+        float speed = Game_Manager.instance.Speed;
+        if (speed >= 1)
+            speed = -1;
+        Head.transform.Rotate(0, 0, 20 * speed * Time.deltaTime);
     }
 
     public GameObject GetHead() {
@@ -21,13 +25,12 @@ public class Player_Manager : MonoBehaviour {
 
     public void SetHead(GameObject head) {
         head.transform.parent = HeadLocation;
-        head.transform.DOMove(new Vector3(0, 0, 0), 3);
+        head.transform.DOMove(EndPosition.position, 1);
         Head = head;
         Invoke("FixHead", 3);
     }
 
     public void FixHead() {
         Head.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.2f);
-        Debug.Log("Position");
     }
 }
