@@ -9,20 +9,26 @@ public class EnemyBehaviour : MonoBehaviour {
     /// franshuntink.nl
     /// </summary>
     /// 
-
+    [Header("Basic enemy settings")]
     public float enemySpeed;
-    public float chaseThreshold;
+    public float chaseThreshold = 30;
+    public float chaseMinimum = 4;
     private GameObject targetObject;
 
+    [Header("AI performance settings")]
+    public float checkDelay = 0.2f; 
+
+    private bool isChasing;
     //constants
     private static float ENEMY_SPEED = 1f;
-
+    
 
 	// Use this for initialization
 	void Start () {
         
         targetObject = Game_Manager.instance.playerObject;
         SanitizeInput();
+        StartCoroutine(checkForPlayer());
 	}
 	
     //checks some input and throws some warnings at the user 
@@ -44,20 +50,44 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-       if(Vector2.Distance(gameObject.transform.position,targetObject.transform.position) < chaseThreshold)
+        Debug.Log(isChasing);
+    
+        //if we are chasing - decided by a coroutine that checks distance 
+       if(isChasing)
         {
             ChaseEnemy();
         }
     }
 
+    //we start chasing the player once he is within reach (chaseThreshold) but stops in front of the target (chaseMinimum)
+    private IEnumerator checkForPlayer()
+    {
+        if (Vector2.Distance(gameObject.transform.position, targetObject.transform.position) < chaseThreshold)
+        {
+            if (Vector2.Distance(gameObject.transform.position, targetObject.transform.position) > chaseMinimum)
+            {
+                isChasing = true;
+            }
+            else
+            {
+                isChasing = false;
+            }
+         
+        }
+        else
+        {
+            isChasing = false;
+        }
+        yield return new WaitForSeconds(checkDelay);
+        StartCoroutine(checkForPlayer());
+    }
 
     void ChaseEnemy()
     {
         if (!Physics.Linecast(transform.position, targetObject.transform.position))
         {
-            //if there is no obstruction we start chasing
-            gameObject.transform.position = Vector2.MoveTowards(transform.position, targetObject.transform.position, ENEMY_SPEED * (enemySpeed/100));
+            Vector2 chaseTransform =  Vector2.MoveTowards(transform.position, targetObject.transform.position, ENEMY_SPEED * (enemySpeed / 100));
+            transform.position = new Vector2(chaseTransform.x, gameObject.transform.position.y);
         }
 
     }
