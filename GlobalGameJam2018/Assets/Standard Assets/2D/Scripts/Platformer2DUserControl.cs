@@ -10,7 +10,7 @@ namespace UnityStandardAssets._2D
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
         private static float TILT_SENSITIVITY = 0.8f;
-        private static float TILT_THRESHOLD = 0.2f;
+        private static float TILT_THRESHOLD = 0.3f; //the higher this value is, the more tilt it requires to start moving
 
 
         private void Awake()
@@ -38,14 +38,15 @@ namespace UnityStandardAssets._2D
             if(h >  TILT_SENSITIVITY) { h = 1; }
             
             //ignore tilts in a certain zone
-            if(h < 0 || h > -TILT_THRESHOLD) //between zero and -0.2f ->
+            if(h < 0 && h > -TILT_THRESHOLD)
             {
                 h = 0;
             }
-            if(h > 0 || h < TILT_THRESHOLD)
+            if(h > 0 && h < TILT_THRESHOLD)
             {
                 h = 0;
             }
+
             m_Character.Move(h, crouch, m_Jump);
   
 

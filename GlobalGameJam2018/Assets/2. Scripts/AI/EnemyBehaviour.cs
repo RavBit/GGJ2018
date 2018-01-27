@@ -10,28 +10,48 @@ public class EnemyBehaviour : MonoBehaviour {
     /// </summary>
     /// 
     [Header("Basic enemy settings")]
-    public float enemySpeed;
     public float chaseThreshold = 30;
     public float chaseMinimum = 4;
     private GameObject targetObject;
+    public float jumpCooldown = 2;
+
+    [Header("Stats as percentages")]
+    public float enemySpeed = 100;
+    public float jumpSpeed = 100;
+    public float maxJumpHeight = 20;
 
     [Header("AI performance settings")]
     public float checkDelay = 0.2f; 
 
     private bool isChasing;
+    private bool isJumping;
+    [SerializeField]
+    private bool isGrounded;
+
     //constants
-    private static float ENEMY_SPEED = 1f;
+    private static float ENEMY_SPEED = 0.1f;
+    private static float JUMP_THRESHOLD = 0.2f;
+    [SerializeField]
+    private LayerMask groundLayermask;
+    private Transform groundedChecker;
     
+    enum cooldowns
+    {
+        jump
+    }
+
 
 	// Use this for initialization
 	void Start () {
-        
+        groundedChecker = transform.Find("GroundedCheck");
         targetObject = Game_Manager.instance.playerObject;
+
+        //runs some functions
         SanitizeInput();
         StartCoroutine(checkForPlayer());
 	}
 	
-    //checks some input and throws some warnings at the user 
+    //checks some input and throws warnings at the user 
     void SanitizeInput()
     {
         if(chaseThreshold == 0)
@@ -49,24 +69,43 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
-        Debug.Log(isChasing);
-    
+	void FixedUpdate () {
+        isGrounded = false;
         //if we are chasing - decided by a coroutine that checks distance 
-       if(isChasing)
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundedChecker.position, 0.2f , groundLayermask);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+                isGrounded = true;
+        }
+
+        if (isChasing)
         {
             ChaseEnemy();
         }
+
     }
 
     //we start chasing the player once he is within reach (chaseThreshold) but stops in front of the target (chaseMinimum)
     private IEnumerator checkForPlayer()
     {
-        if (Vector2.Distance(gameObject.transform.position, targetObject.transform.position) < chaseThreshold)
+
+        float distance = Vector2.Distance(gameObject.transform.position, targetObject.transform.position);
+        if (distance < chaseThreshold)
         {
-            if (Vector2.Distance(gameObject.transform.position, targetObject.transform.position) > chaseMinimum)
+            if (distance > chaseMinimum)
             {
                 isChasing = true;
+
+                float heightDif = targetObject.transform.position.y - gameObject.transform.position.y;
+      
+                if (!isJumping && heightDif > JUMP_THRESHOLD && isGrounded)
+                {
+                    isJumping = true;
+                    Jump(heightDif, 0);
+                }
+
             }
             else
             {
@@ -82,13 +121,36 @@ public class EnemyBehaviour : MonoBehaviour {
         StartCoroutine(checkForPlayer());
     }
 
+
+    void Jump(float heightDifference, float widthDifference)
+    {
+        if (heightDifference > maxJumpHeight) { heightDifference = maxJumpHeight; }
+
+        gameObject.GetComponent<Rigidbody2D>().velocity = (Vector2.up * heightDifference * (jumpSpeed/100));
+        StartCoroutine(Cooldown(cooldowns.jump));
+    }
+
+
     void ChaseEnemy()
     {
         if (!Physics.Linecast(transform.position, targetObject.transform.position))
         {
-            Vector2 chaseTransform =  Vector2.MoveTowards(transform.position, targetObject.transform.position, Game_Manager.instance.Speed * ENEMY_SPEED * (enemySpeed / 100));
+            //it's possible to look at target
+            Vector2 chaseTransform = Vector2.MoveTowards(transform.position, targetObject.transform.position, Game_Manager.instance.Speed * ENEMY_SPEED * (enemySpeed / 100));
             transform.position = new Vector2(chaseTransform.x, gameObject.transform.position.y);
+        }
+    }
+
+    //all enemy cooldowns
+    private IEnumerator Cooldown(cooldowns cd)
+    {
+        if(cd == cooldowns.jump)
+        {
+            yield return new WaitForSeconds(jumpCooldown);
+            isJumping = false;
         }
 
     }
+
+ 
 }
