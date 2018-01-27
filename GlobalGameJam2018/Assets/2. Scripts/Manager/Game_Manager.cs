@@ -28,7 +28,9 @@ public class Game_Manager : MonoBehaviour {
     {
         playerObject = GameObject.Find("Player");
     }
-
+    private void Update() {
+        Time.timeScale = Speed * 1;
+    }
     public void ResetSpeed() {
         Debug.Log("resetspeed");
         StartCoroutine("TimerSpeed");
