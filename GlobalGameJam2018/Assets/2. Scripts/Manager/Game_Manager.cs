@@ -12,6 +12,9 @@ public class Game_Manager : MonoBehaviour {
     public float Speed = 1;
     public float Malfunction = 1;
 
+    //sketchy player related stuff
+    public bool playerIsMobile;
+
 
     public GameObject playerObject;
 
