@@ -130,7 +130,6 @@ public class EnemyBehaviour : MonoBehaviour {
         StartCoroutine(Cooldown(cooldowns.jump));
     }
 
-
     void ChaseEnemy()
     {
         if (!Physics.Linecast(transform.position, targetObject.transform.position))
