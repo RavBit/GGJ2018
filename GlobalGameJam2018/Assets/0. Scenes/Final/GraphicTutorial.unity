@@ -545,6 +545,10 @@ Prefab:
       propertyPath: orthographic size
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1916142701188906, guid: 6f4f0c3663978fc4db9022c5e1331d2e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f4f0c3663978fc4db9022c5e1331d2e, type: 2}
   m_IsPrefabParent: 0
@@ -1479,6 +1483,7 @@ MonoBehaviour:
   WheelSpeed: 1
   Speed: 1
   Malfunction: 1
+  playerIsMobile: 0
   playerObject: {fileID: 0}
 --- !u!4 &153113980 stripped
 Transform:
@@ -13905,7 +13910,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 427958, guid: 210af2eb3aed7ab4ca9f921065d84ef7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.01
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 427958, guid: 210af2eb3aed7ab4ca9f921065d84ef7, type: 2}
       propertyPath: m_LocalPosition.z

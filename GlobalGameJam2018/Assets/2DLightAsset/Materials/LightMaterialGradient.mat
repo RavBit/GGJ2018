@@ -24,7 +24,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _InvFade: 1
-    - _Offset: 0.7
+    - _Offset: 0.78
     - _UVXOffset: 0
     - _UVXScale: 0.02
     - _UVYOffset: 0
