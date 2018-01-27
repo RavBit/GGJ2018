@@ -20,6 +20,12 @@ public class Game_Manager : MonoBehaviour {
             Debug.LogError("More than one Game Manager in the scene");
         else
             instance = this;
+
+
+    }
+    private void Start()
+    {
+        playerObject = GameObject.Find("Player");
     }
 
     public void ResetSpeed() {
