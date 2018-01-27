@@ -6,6 +6,7 @@ public class Game_Manager : MonoBehaviour {
 
     public static Game_Manager instance;
 
+    public float WheelGravity = 1;
     public float Gravity = 1;
     public float WheelSpeed = 1;
     public float Speed = 1;
@@ -32,6 +33,20 @@ public class Game_Manager : MonoBehaviour {
             Game_Manager.instance.Speed += 0.1f;
             Game_Manager.instance.WheelSpeed -= 0.25f;
             Event_Manager.Music_Change();
+            yield return new WaitForSeconds(1);
+        }
+        Debug.Log("Normalized");
+    }
+    public void ResetGravity(){
+        Debug.Log("resetspeed");
+        StartCoroutine("TimerGravity");
+    }
+    public IEnumerator TimerGravity() {
+        yield return new WaitForSeconds(3);
+        while (Gravity < 1) {
+            Debug.Log("Slowing");
+            Game_Manager.instance.Gravity += 0.1f;
+            Game_Manager.instance.WheelGravity -= 0.25f;
             yield return new WaitForSeconds(1);
         }
         Debug.Log("Normalized");

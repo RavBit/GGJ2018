@@ -6,20 +6,11 @@ public class Time_Manager : MonoBehaviour {
 
     public void TimeChange(int number) {
         switch(number) {
-            case (-2):
-                Change_Time(Time_States.FastBack);
-                break;
-            case (-1):
-                Change_Time(Time_States.Back);
-                break;
             case (0):
-                Change_Time(Time_States.Normal);
+                Change_Time(Time_States.Speed);
                 break;
             case (1):
-                Change_Time(Time_States.Forward);
-                break;
-            case (2):
-                Change_Time(Time_States.FastForward);
+                Change_Time(Time_States.Gravity);
                 break;
         }
     }
@@ -30,9 +21,6 @@ public class Time_Manager : MonoBehaviour {
 }
 
 public enum Time_States {
-    FastBack,
-    Back,
-    Normal,
-    Forward,
-    FastForward
+    Gravity,
+    Speed,
 }
