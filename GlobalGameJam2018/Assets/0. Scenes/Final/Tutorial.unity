@@ -2788,16 +2788,6 @@ Prefab:
       propertyPath: m_Name
       value: GearController
       objectReference: {fileID: 0}
-    - target: {fileID: 233431831441912370, guid: 06f412a4384827b4db1f73d6e9ae1deb,
-        type: 2}
-      propertyPath: m_UseMotor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 233431831441912370, guid: 06f412a4384827b4db1f73d6e9ae1deb,
-        type: 2}
-      propertyPath: m_Motor.m_MotorSpeed
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06f412a4384827b4db1f73d6e9ae1deb, type: 2}
   m_IsPrefabParent: 0
