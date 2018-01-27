@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurnGearScript : MonoBehaviour {
     public float gearSpeed;
     public float multiply;
+    public bool isActive;
 	// Use this for initialization
 	void Start () {
         Debug.Log(transform.localScale.x);
@@ -13,6 +14,12 @@ public class TurnGearScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(0, 0, (gearSpeed * transform.localScale.x) * multiply);
+
+        if(isActive)
+        {
+            transform.Rotate(0, 0, (gearSpeed * transform.localScale.x) * multiply);
+        }
+
+  
 	}
 }

@@ -8,8 +8,12 @@ public class ClockWheel_Controller : MonoBehaviour {
     public bool Triggered = false;
     public Transform EndPosition;
     public GameObject Head;
+    public GameObject[] gearsToTurn; //gears to turn on addinghead
+    public GameObject barrierArm;
 
     private void Start() {
+
+   
     }
     void OnTriggerEnter2D(Collider2D coll) {
         Debug.Log("col " + coll.gameObject.name);
@@ -41,6 +45,17 @@ public class ClockWheel_Controller : MonoBehaviour {
         gameObject.GetComponent<Collider2D>().enabled = false;
         Head.transform.parent = EndPosition;
         Head.transform.DOMove(EndPosition.position, 3);
+        StartCoroutine(OnGearAdded()); //start rotation after x seconds on the now connected gear
+    }
+    private IEnumerator OnGearAdded()
+    {
+        yield return new WaitForSeconds(2f);
+        for (int i =0;i < gearsToTurn.Length; i++)
+        {
+            gearsToTurn[i].GetComponent<TurnGearScript>().isActive = true;
+        }
+        barrierArm.GetComponent<Rigidbody2D>().isKinematic = false;
+        barrierArm.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
 }
