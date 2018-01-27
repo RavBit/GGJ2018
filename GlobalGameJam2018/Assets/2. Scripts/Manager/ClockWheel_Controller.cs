@@ -16,7 +16,7 @@ public class ClockWheel_Controller : MonoBehaviour {
    
     }
     void OnTriggerEnter2D(Collider2D coll) {
-        Debug.Log("col " + coll.gameObject.name);
+      //  Debug.Log("col " + coll.gameObject.name);
         if (coll.gameObject.tag == "Player") {
             Event_Manager.ClockWheel_Change(ClockWheelState.Start);
             Button btn = Event_Manager.Get_Button();

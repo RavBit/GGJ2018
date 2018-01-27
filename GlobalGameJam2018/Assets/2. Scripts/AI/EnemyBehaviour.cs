@@ -141,7 +141,7 @@ public class EnemyBehaviour : MonoBehaviour {
         if (!Physics.Linecast(transform.position, targetObject.transform.position))
         {
             //it's possible to look at target
-            Vector2 chaseTransform = Vector2.MoveTowards(transform.position, targetObject.transform.position, Game_Manager.instance.Speed * ENEMY_SPEED * (enemySpeed / 100));
+            Vector2 chaseTransform = Vector2.MoveTowards(transform.position, targetObject.transform.position, ENEMY_SPEED * (enemySpeed / 100));
             transform.position = new Vector2(chaseTransform.x, gameObject.transform.position.y);
         }
     }

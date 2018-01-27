@@ -5,15 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/0. Scenes/ProtoFrans2.unity
-    guid: 244042a89496b8d488810eaa86ca9f25
-  - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/f9d211127dba051419f5129ca2b28ad5
-    guid: f9d211127dba051419f5129ca2b28ad5
-  - enabled: 0
-    path: Assets/0. Scenes/ProtoFrans.unity
-    guid: d434f82f67ad94e4f8138bfa11ae0757
   - enabled: 1
     path: Assets/0. Scenes/Final/Tutorial.unity
     guid: 014033cb910c069479d476050effccfb
+  - enabled: 1
+    path: Assets/0. Scenes/Final/Game.unity
+    guid: b773b9ec90039da419ddae2f3aa90a43
