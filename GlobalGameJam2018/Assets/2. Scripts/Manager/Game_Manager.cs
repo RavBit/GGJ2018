@@ -46,7 +46,7 @@ public class Game_Manager : MonoBehaviour {
             Event_Manager.Music_Change();
             yield return new WaitForSeconds(1);
         }
-        Debug.Log("Normalized");
+       // Debug.Log("Normalized");
     }
     public void ResetGravity(){
         Debug.Log("resetspeed");
