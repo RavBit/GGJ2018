@@ -10,7 +10,7 @@ namespace UnityStandardAssets._2D
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
         private static float TILT_SENSITIVITY = 0.8f;
-        private static float TILT_THRESHOLD = 0.3f; //the higher this value is, the more tilt it requires to start moving
+        private static float TILT_THRESHOLD = 0.1f; //the higher this value is, the more tilt it requires to start moving
 
 
         private void Awake()
