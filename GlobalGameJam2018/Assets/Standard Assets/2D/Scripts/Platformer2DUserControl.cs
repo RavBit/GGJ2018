@@ -10,6 +10,7 @@ namespace UnityStandardAssets._2D
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
         private static float TILT_SENSITIVITY = 0.8f;
+        private static float TILT_THRESHOLD = 0.2f;
 
 
         private void Awake()
@@ -43,9 +44,17 @@ namespace UnityStandardAssets._2D
             float h = Input.acceleration.x;
             if(h < -TILT_SENSITIVITY) {  h = -1;}
             if(h >  TILT_SENSITIVITY) { h = 1; }
-        
-            // Pass all parameters to the character control script.
-            m_Character.Move(h, crouch, m_Jump);
+            
+            // Pass all parameters to the character control script
+            if(h > TILT_THRESHOLD || h < TILT_THRESHOLD) //dead zone to prevent accidental tilts
+            {
+                m_Character.Move(h, crouch, m_Jump);
+            }
+            else
+            {
+                m_Character.Move(0, crouch, m_Jump);
+            }
+
             m_Jump = false;
         }
     }
