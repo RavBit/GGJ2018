@@ -8,6 +8,7 @@ public class Time_Manager : MonoBehaviour {
     private void Start() {
         Event_Manager.WheelsMalfunction += StartCoolDown;
         Event_Manager.MalfunctionSet += SetMalfunction;
+        StartCoroutine("Regenerate");
     }
     WaitForSeconds waitForSeconds = new WaitForSeconds(5f);
 
@@ -22,7 +23,8 @@ public class Time_Manager : MonoBehaviour {
         Malfunction = state;
     }
     public void TimeChange(int number) {
-        if ((Game_Manager.instance.Speed <= 0.1f && !Malfunction )){
+        if ((Game_Manager.instance.Speed <= 0.1f && !Malfunction))
+        {
             Event_Manager.Wheels_Malfunction();
             Malfunction = true;
         }

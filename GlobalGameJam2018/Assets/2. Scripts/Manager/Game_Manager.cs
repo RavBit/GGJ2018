@@ -48,7 +48,7 @@ public class Game_Manager : MonoBehaviour {
         StartCoroutine("TimerGravity");
     }
     public IEnumerator TimerGravity() {
-        while (Gravity < 1 && Malfunction == 1) {
+        while (Gravity < 1) {
             Debug.Log("Slowing");
             Game_Manager.instance.Gravity += 0.1f;
             Game_Manager.instance.WheelGravity -= 0.25f;
