@@ -18,15 +18,6 @@ namespace UnityStandardAssets._2D
             m_Character = GetComponent<PlatformerCharacter2D>();
         }
 
-
-        private void Update()
-        {
-            if (!m_Jump)
-            {
-         
-            }
-        }
-
         public void performJump()
         {
             m_Jump = true;
@@ -36,6 +27,7 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             // Read the inputs.
+            
             bool crouch = Input.GetKey(KeyCode.LeftControl);
 
             //HACKED: Takes acceleration from x axis as horizontal movement instead of inputManager.
@@ -45,15 +37,17 @@ namespace UnityStandardAssets._2D
             if(h < -TILT_SENSITIVITY) {  h = -1;}
             if(h >  TILT_SENSITIVITY) { h = 1; }
             
-            // Pass all parameters to the character control script
-            if(h > TILT_THRESHOLD || h < TILT_THRESHOLD) //dead zone to prevent accidental tilts
+            //ignore tilts in a certain zone
+            if(h < 0 || h > -TILT_THRESHOLD) //between zero and -0.2f ->
             {
-                m_Character.Move(h, crouch, m_Jump);
+                h = 0;
             }
-            else
+            if(h > 0 || h < TILT_THRESHOLD)
             {
-                m_Character.Move(0, crouch, m_Jump);
+                h = 0;
             }
+            m_Character.Move(h, crouch, m_Jump);
+  
 
             m_Jump = false;
         }
