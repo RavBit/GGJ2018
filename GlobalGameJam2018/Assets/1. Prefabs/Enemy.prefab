@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1441991568399442}
   m_IsPrefabParent: 1
+--- !u!1 &1330087562454876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4976635020136358}
+  m_Layer: 0
+  m_Name: GroundedCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1441991568399442
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,10 +52,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441991568399442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.582654, y: 1.2536373, z: 0.14815581}
-  m_LocalScale: {x: 0.60923964, y: 0.6092396, z: 0.6092396}
-  m_Children: []
+  m_LocalPosition: {x: 4.582654, y: -0.84, z: 0.14815581}
+  m_LocalScale: {x: 0.2663268, y: 0.26632679, z: 0.26632679}
+  m_Children:
+  - {fileID: 4976635020136358}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4976635020136358
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330087562454876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.02, y: -1.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4158999406582036}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50148843284144342
@@ -62,7 +91,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61796696927508292
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -75,7 +104,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.038832545, y: 0.025888205}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -86,7 +115,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.3721023, y: 2.5015445}
   m_EdgeRadius: 0
 --- !u!114 &114606444221278816
 MonoBehaviour:
@@ -99,10 +128,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a62176b2fb1dc43ab643239eaec037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 50
-  chaseThreshold: 100
+  chaseThreshold: 5
   chaseMinimum: 2
-  checkDelay: 0.2
+  jumpCooldown: 2
+  enemySpeed: 100
+  jumpSpeed: 400
+  maxJumpHeight: 2
+  checkDelay: 0.35
+  isGrounded: 0
+  groundLayermask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!212 &212324575371534410
 SpriteRenderer:
   m_ObjectHideFlags: 1

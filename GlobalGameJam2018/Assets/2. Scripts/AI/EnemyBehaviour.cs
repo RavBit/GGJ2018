@@ -16,12 +16,12 @@ public class EnemyBehaviour : MonoBehaviour {
     public float jumpCooldown = 2;
 
     [Header("Stats as percentages")]
-    public float enemySpeed = 100;
-    public float jumpSpeed = 100;
-    public float maxJumpHeight = 20;
+    public float enemySpeed = 30;
+    public float jumpSpeed = 250;
+    public float maxJumpHeight = 2;
 
     [Header("AI performance settings")]
-    public float checkDelay = 0.2f; 
+    public float checkDelay = 0.1f; 
 
     private bool isChasing;
     private bool isJumping;
