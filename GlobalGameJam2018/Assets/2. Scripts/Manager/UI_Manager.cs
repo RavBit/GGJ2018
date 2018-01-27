@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 public class UI_Manager : MonoBehaviour {
+    public GameObject GearInteraction;
     public GameObject GearSpeed;
     public GameObject GearGravity;
     public void Start() {
