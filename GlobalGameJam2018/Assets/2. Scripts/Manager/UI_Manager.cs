@@ -4,13 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 public class UI_Manager : MonoBehaviour {
+    [Header("Gear GameObjects")]
     public GameObject GearInteraction;
     public GameObject GearSpeed;
     public GameObject GearGravity;
+
+    [Header("Transforms for Interaction")]
+    public Transform StartInteraction;
+    public Transform StopInteraction;
     public void Start() {
         Event_Manager.TimeChange += Rotate_Wheel;
+        Event_Manager.ClockWheelChange += ToggleInteraction;
+        Event_Manager.GetButton += GetButton;
     }
-
+    public Button GetButton() {
+        return GearInteraction.GetComponent<Button>();
+    }
     public void Rotate_Wheel(Time_States _ts) {
         switch (_ts) {
             case (Time_States.Speed):
@@ -37,7 +46,14 @@ public class UI_Manager : MonoBehaviour {
         GearGravity.transform.Rotate(0, 0, 20 * speed2 * Time.deltaTime);
         GearInteraction.transform.Rotate(0, 0, 20 * -5 * Time.deltaTime);
     }
-    public void ToggleInteraction() {
-
+    public void ToggleInteraction(ClockWheelState cws) {
+        switch (cws) {
+            case (ClockWheelState.Start):
+                GearInteraction.transform.DOMove(StartInteraction.transform.position, 2);
+                break;
+            case (ClockWheelState.Stop):
+                GearInteraction.transform.DOMove(StopInteraction.transform.position, 2);
+                break;
+        }
     }
 }
