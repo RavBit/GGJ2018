@@ -11,6 +11,7 @@ public class Game_Manager : MonoBehaviour {
     public float WheelSpeed = 1;
     public float Speed = 1;
     public float Malfunction = 1;
+    public int Lives = 3;
 
     //sketchy player related stuff
     public bool playerIsMobile;
@@ -29,10 +30,11 @@ public class Game_Manager : MonoBehaviour {
     }
     private void Start()
     {
+        Lives = 3;
         playerObject = GameObject.Find("Player");
     }
     private void Update() {
-        Time.timeScale = Speed * 1;
+        Time.timeScale = Speed * 1 * .5f;
     }
     public void ResetSpeed() {
         Debug.Log("resetspeed");
@@ -44,7 +46,7 @@ public class Game_Manager : MonoBehaviour {
             Game_Manager.instance.Speed += 0.1f;
             Game_Manager.instance.WheelSpeed -= 0.25f;
             Event_Manager.Music_Change();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1 * Speed);
         }
        // Debug.Log("Normalized");
     }

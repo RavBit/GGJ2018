@@ -9,6 +9,8 @@ public class UI_Manager : MonoBehaviour {
     public GameObject GearSpeed;
     public GameObject GearGravity;
 
+    public Image BaroSpeed;
+    public Image BaroGravity;
     [Header("Transforms for Interaction")]
     public Transform StartInteraction;
     public Transform StopInteraction;
@@ -44,6 +46,8 @@ public class UI_Manager : MonoBehaviour {
         if (Game_Manager.instance.WheelGravity == 1) {
             speed2 = -1;
         }
+        BaroSpeed.DOFillAmount((1 - Game_Manager.instance.Speed), 0.1f);
+        BaroGravity.DOFillAmount((1 - ( Game_Manager.instance.Gravity)), 0.1f);
         GearSpeed.transform.Rotate(0, 0, Game_Manager.instance.Malfunction * 20 * speed * Time.deltaTime);
         GearGravity.transform.Rotate(0, 0, 20 * Game_Manager.instance.Malfunction * speed2 * Time.deltaTime);
         GearInteraction.transform.Rotate(0, 0, 20 * -5 * Time.deltaTime);

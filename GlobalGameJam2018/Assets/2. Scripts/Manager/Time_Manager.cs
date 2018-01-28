@@ -23,9 +23,10 @@ public class Time_Manager : MonoBehaviour {
         Malfunction = state;
     }
     public void TimeChange(int number) {
-        if ((Game_Manager.instance.Speed <= 0.1f && !Malfunction))
+        if ((Game_Manager.instance.Speed <= 0.1f && !Malfunction || Game_Manager.instance.Gravity <= 0.5f && !Malfunction))
         {
             Event_Manager.Wheels_Malfunction();
+            Game_Manager.instance.Lives--;
             Malfunction = true;
         }
         if (Malfunction)
@@ -46,7 +47,7 @@ public class Time_Manager : MonoBehaviour {
     void StartCoolDown() {
         Game_Manager.instance.Malfunction = 0;
         Handheld.Vibrate();
-        Invoke("CoolDown", 4);
+        Invoke("CoolDown", 4 * Game_Manager.instance.Speed);
     }
 
     void CoolDown() {
