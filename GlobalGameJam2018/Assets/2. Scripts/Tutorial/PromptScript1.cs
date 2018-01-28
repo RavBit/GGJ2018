@@ -10,6 +10,9 @@ public class PromptScript1 : MonoBehaviour {
     private static float promptTime = 5f;
     public GameObject test;
     public Sprite cutscene2;
+    public Sprite logo;
+    public AudioSource background;
+    public AudioSource cutcene;
     void Start()
     {
         test.GetComponent<Image>().DOFade(0, 0.01f);
@@ -24,6 +27,9 @@ public class PromptScript1 : MonoBehaviour {
             promptUsed = true;
             col.gameObject.GetComponent<PlatformerCharacter2D>().isMobile = false;
             test.SetActive(true);
+            background.DOFade(0, 1);
+            cutcene.Play();
+            cutcene.DOFade(1, 1);
             test.GetComponent<Image>().DOFade(1, 2f);
             test.GetComponentInChildren<Text>().DOText("Try to escape from this dead robot by winding your gear",2);
             StartCoroutine(mobilityTimer(col.gameObject));
@@ -37,5 +43,7 @@ public class PromptScript1 : MonoBehaviour {
         test.GetComponentInChildren<Text>().DOText("To be continued", 1);
         test.GetComponent<Image>().sprite = cutscene2;
         yield return new WaitForSeconds(2);
+        test.GetComponentInChildren<Text>().DOText("", 1);
+        test.GetComponent<Image>().sprite = logo;
     }
 }
